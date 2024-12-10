@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Reading Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #555;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-left: 3px solid #333;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .card-images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .card-images img {
+            max-width: 150px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tarot Reading Results</h1>
+        <h2>Question:</h2>
+        <p>{{ question if question else 'No question provided' }}</p>
+        <h2>Querent Information:</h2>
+        <p>{{ querent_info }}</p>
+        <h2>Tarot Cards:</h2>
+        <div class="card-images">
+            {% for rank, card in cards.items() %}
+                <div>
+                    <p><strong>{{ rank }}: {{ card }}</strong></p>
+                    <img src="{{ card_images[rank] }}" alt="{{ card }}">
+                </div>
+            {% endfor %}
+        </div>
+        <h2>Interpretation:</h2>
+        <p>{{ chatgpt_response | safe }}</p>
+        <a href="{{ url_for('index') }}">
+            <button type="button">Home</button>
+        </a>
+    </div>
+</body>
+</html>
